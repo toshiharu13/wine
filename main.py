@@ -1,3 +1,4 @@
+import collections
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import datetime
 import pandas
@@ -11,7 +12,7 @@ day_of_born = datetime.datetime(year=1920, month=1, day=1, hour=00).year
 delta = today-day_of_born
 excel_data = pandas.read_excel('wine.xlsx', sheet_name='Лист1').to_dict(orient='record')
 excel_data_extension = pandas.read_excel('wine2.xlsx', sheet_name='Лист1').to_dict(orient='record')
-wine_by_category = {}
+wine_by_category = collections.defaultdict(list)
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -27,10 +28,8 @@ for wine in excel_data_extension:
     for element in wine:
         if pandas.isna(wine[element]):
             wine[element] = None
-    if wine['Категория'] in wine_by_category:
-        wine_by_category[wine['Категория']].append(wine)
-    else:
-        wine_by_category[wine['Категория']] = [wine]
+    wine_by_category[wine['Категория']].append(wine)
+
 
 pprint(wine_by_category)
 with open('index.html', 'w', encoding="utf8") as file:
