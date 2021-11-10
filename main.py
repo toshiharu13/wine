@@ -14,6 +14,12 @@ excel_data = pandas.read_excel('wine.xlsx', sheet_name='Лист1').to_dict(orie
 excel_data_extension = pandas.read_excel('wine2.xlsx', sheet_name='Лист1').to_dict(orient='record')
 wine_by_category = collections.defaultdict(list)
 
+for wine in excel_data_extension:
+    for element in wine:
+        if pandas.isna(wine[element]):
+            wine[element] = None
+    wine_by_category[wine['Категория']].append(wine)
+
 env = Environment(
     loader=FileSystemLoader('.'),
     autoescape=select_autoescape(['html', 'xml'])
@@ -22,14 +28,8 @@ template = env.get_template('template.html')
 rendered_page = template.render(
     winery_age=delta,
     excel_data=excel_data,
+    wine_by_category=wine_by_category,
 )
-
-for wine in excel_data_extension:
-    for element in wine:
-        if pandas.isna(wine[element]):
-            wine[element] = None
-    wine_by_category[wine['Категория']].append(wine)
-
 
 pprint(wine_by_category)
 with open('index.html', 'w', encoding="utf8") as file:

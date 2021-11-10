@@ -114,19 +114,27 @@
           </div>
         </div>
         <div class="row">
-          {% for product in range(6) %}
+
+          {% for category in wine_by_category %}
+          <div class="col-12 section-title text-center mb-5">
+            <H2 class="d-block">{{category}}</H2>
+          </div>
+
+           {% for product in wine_by_category[category] %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{excel_data[product]['Картинка']}}" alt="Image" class="img-fluid">
+              <img src="images/{{product['Картинка']}}" alt="Image" class="img-fluid">
               <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{excel_data[product]['Название']}}</h3>
+                <h3 class="heading mt-3 mb-3 text-dark">{{product['Название']}}</h3>
                 <p>
-                  Сорт винограда - {{excel_data[product]['Сорт']}}<br/>
-                  <span class="price">{{excel_data[product]['Цена']}}</span>
+                  Сорт винограда - {{product['Сорт']}}<br/>
+                  <span class="price">{{product['Цена']}}</span>
                 </p>
               </div>
             </div>
           </div>
+
+          {% endfor %}
           {% endfor %}
       </div>
 
