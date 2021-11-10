@@ -1,5 +1,6 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import datetime
+import pandas
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -14,6 +15,8 @@ template = env.get_template('template.html')
 rendered_page = template.render(
     winery_age=delta,
 )
+excel_data = pandas.read_excel('wine.xlsx', sheet_name='Лист1')
+print(excel_data.to_dict(orient='record'))
 with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
 
