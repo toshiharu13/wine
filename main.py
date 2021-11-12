@@ -14,8 +14,8 @@ logging.basicConfig(
     filemode='w',
     )
 
-this_year = datetime.datetime.now().year
-year_of_born = datetime.datetime(year=1920, month=1, day=1, hour=00).year
+this_year = int(datetime.datetime.now().year)
+year_of_born = 1920
 delta = this_year - year_of_born
 excel_data_sale = pandas.read_excel(
     'wine3.xlsx', sheet_name='Лист1'
