@@ -1,10 +1,18 @@
 import collections
 import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-from pprint import pprint
+import logging
 
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s; %(levelname)s; %(name)s; %(message)s',
+    filename='logs.lod',
+    filemode='w',
+    )
 
 today = datetime.datetime.now().year
 day_of_born = datetime.datetime(year=1920, month=1, day=1, hour=00).year
@@ -31,6 +39,7 @@ rendered_page = template.render(
     wine_by_category=wine_by_category,
 )
 
+logging.info(wine_by_category)
 with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
 
