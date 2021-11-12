@@ -31,7 +31,6 @@ rendered_page = template.render(
     wine_by_category=wine_by_category,
 )
 
-pprint(wine_by_category)
 with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
 
