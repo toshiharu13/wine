@@ -16,13 +16,13 @@ logging.basicConfig(
 
 this_year = int(datetime.datetime.now().year)
 year_of_born = 1920
-delta = this_year - year_of_born
-excel_data_sale = pandas.read_excel(
+winery_age = this_year - year_of_born
+list_of_wines = pandas.read_excel(
     'wine3.xlsx', sheet_name='Лист1'
 ).to_dict(orient='record')
 wine_by_category = collections.defaultdict(list)
 
-for wine in excel_data_sale:
+for wine in list_of_wines:
     for element in wine:
         if pandas.isna(wine[element]):
             wine[element] = None
@@ -34,8 +34,8 @@ env = Environment(
 )
 template = env.get_template('template.html')
 rendered_page = template.render(
-    winery_age=delta,
-    excel_data=excel_data_sale,
+    winery_age=winery_age,
+    excel_data=list_of_wines,
     wine_by_category=wine_by_category,
 )
 
