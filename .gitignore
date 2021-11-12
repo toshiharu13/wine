@@ -1,6 +1,41 @@
-env/
-.vscode/
+.git/*
+
+*.sublime-project
+*.sublime-workspace
+
+media/
+
+# Django db:
+_db._sqlite3
+db.sqlite3-journal
+
+# Environments
+.env
+.venv
+.env/
 venv/
+.env/
+env.bak/
+venv.bak/
+
+#additionally
+temp.py
 
 # Repl.it
 .replit
+poetry.lock
+pyproject.toml
+
+# python cahe files
+__pycache__/
+*.py[cod]
+
+# IDE config files
+.vscode
+.idea
+
+# OS temp files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
