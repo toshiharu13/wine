@@ -27,8 +27,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Страничка виноделов Новое русское вино'
     )
-    parser.add_argument('--file', help='имя файла xlsx', default='wine3.xlsx')
-    parser.add_argument('--list_in_file', help='имя листа в xlsx файле', default='Лист1')
+    parser.add_argument(
+        '--file', help='имя файла xlsx', default='sample_file.xlsx'
+    )
+    parser.add_argument(
+        '--list_in_file', help='имя листа в xlsx файле', default='Лист1'
+    )
     args = parser.parse_args()
 
     this_year = int(datetime.datetime.now().year)
