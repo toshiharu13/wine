@@ -7,6 +7,15 @@ import logging
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+
+def change_nan_to_none(wine_list):
+    for wine in wine_list:
+        for wine_element in wine:
+            if pandas.isna(wine[wine_element]):
+                wine[wine_element] = None
+    return wine_list
+
+
 if __name__ == '__main__':
     logging.basicConfig(
         level=logging.DEBUG,
@@ -30,9 +39,8 @@ if __name__ == '__main__':
     ).to_dict(orient='record')
     wine_by_category = collections.defaultdict(list)
 
+    list_of_wines = change_nan_to_none(list_of_wines)
     for wine in list_of_wines:
-        if pandas.isna(wine['Сорт']):
-            wine['Сорт'] = None
         wine_by_category[wine['Категория']].append(wine)
 
     env = Environment(
