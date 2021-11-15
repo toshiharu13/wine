@@ -44,6 +44,7 @@ if __name__ == '__main__':
     wine_by_category = collections.defaultdict(list)
 
     list_of_wines = change_nan_to_none(list_of_wines)
+    logging.info(list_of_wines)
     for wine in list_of_wines:
         wine_by_category[wine['Категория']].append(wine)
 
@@ -54,7 +55,7 @@ if __name__ == '__main__':
     template = env.get_template('template.html')
     rendered_page = template.render(
         winery_age=winery_age,
-        wine_by_category=wine_by_category,
+        wine_by_category=wine_by_category.items(),
     )
 
     logging.info(wine_by_category)
