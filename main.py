@@ -8,14 +8,6 @@ import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-def change_nan_to_none(wine_list):
-    for wine in wine_list:
-        for wine_element in wine:
-            if pandas.isna(wine[wine_element]):
-                wine[wine_element] = None
-    return wine_list
-
-
 if __name__ == '__main__':
     logging.basicConfig(
         level=logging.DEBUG,
@@ -39,11 +31,10 @@ if __name__ == '__main__':
     year_of_born = 1920
     winery_age = this_year - year_of_born
     list_of_wines = pandas.read_excel(
-        args.file, sheet_name=args.list_in_file
+        args.file, sheet_name=args.list_in_file, na_values=None
     ).to_dict(orient='record')
     wine_by_category = collections.defaultdict(list)
 
-    list_of_wines = change_nan_to_none(list_of_wines)
     logging.info(list_of_wines)
     for wine in list_of_wines:
         wine_by_category[wine['Категория']].append(wine)
