@@ -5,6 +5,7 @@ import logging
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import pandas
+import numpy
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
@@ -30,13 +31,13 @@ if __name__ == '__main__':
     this_year = datetime.datetime.now().year
     year_of_born = 1920
     winery_age = this_year - year_of_born
-    list_of_wines = pandas.read_excel(
-        args.file, sheet_name=args.list_in_file, na_values=None
-    ).to_dict(orient='record')
+    wines_roster = pandas.read_excel(
+        args.file, sheet_name=args.list_in_file
+    ).fillna('').to_dict(orient='record')
     wine_by_category = collections.defaultdict(list)
 
-    logging.info(list_of_wines)
-    for wine in list_of_wines:
+    logging.info(wines_roster)
+    for wine in wines_roster:
         wine_by_category[wine['Категория']].append(wine)
 
     env = Environment(
