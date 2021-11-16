@@ -27,7 +27,7 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    this_year = int(datetime.datetime.now().year)
+    this_year = datetime.datetime.now().year
     year_of_born = 1920
     winery_age = this_year - year_of_born
     list_of_wines = pandas.read_excel(
