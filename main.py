@@ -5,9 +5,7 @@ import logging
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import pandas
-import numpy
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
 
 if __name__ == '__main__':
     logging.basicConfig(
